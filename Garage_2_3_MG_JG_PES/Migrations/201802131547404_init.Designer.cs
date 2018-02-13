@@ -7,13 +7,13 @@ namespace Garage_2_3_MG_JG_PES.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ÖkadefunktionalitetiModeldata : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ÖkadefunktionalitetiModeldata));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802131239549_Ökade funktionalitet i Model-data"; }
+            get { return "201802131547404_init"; }
         }
         
         string IMigrationMetadata.Source

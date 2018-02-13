@@ -11,15 +11,14 @@ namespace Garage_2_3_MG_JG_PES.Migrations
                 "dbo.Vehicles",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Type = c.String(),
-                        RegistrationNumber = c.String(),
-                        Color = c.String(),
-                        Brand = c.String(),
-                        Model = c.String(),
+                        Id = c.Int(nullable: false, identity: true),
+                        VehicleType = c.Int(nullable: false),
+                        RegistrationNumber = c.String(nullable: false),
+                        Color = c.String(maxLength: 20),
+                        Brand = c.String(maxLength: 20),
+                        Model = c.String(maxLength: 20),
                         NumberOfWheels = c.Int(nullable: false),
                         CheckIn = c.DateTime(nullable: false),
-                        CheckOut = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
