@@ -44,9 +44,10 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         // GET: Vehicles/Check-In
         public ActionResult CheckIn()
         {
+            
             return View();
         }
-
+           
         // POST: Vehicles/Check-In
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
