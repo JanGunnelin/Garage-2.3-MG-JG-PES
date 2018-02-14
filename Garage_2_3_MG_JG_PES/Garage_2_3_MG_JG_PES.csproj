@@ -167,6 +167,10 @@
     <Compile Include="Migrations\201802131602538_Sedd ändringar nr 2.Designer.cs">
       <DependentUpon>201802131602538_Sedd ändringar nr 2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..cs" />
+    <Compile Include="Migrations\201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..Designer.cs">
+      <DependentUpon>201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\RegisterContext.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -240,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802131602538_Sedd ändringar nr 2.resx">
       <DependentUpon>201802131602538_Sedd ändringar nr 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..resx">
+      <DependentUpon>201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
