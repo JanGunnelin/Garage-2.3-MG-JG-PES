@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Configuration;
 using System.Linq;
 using System.Web;
@@ -11,8 +12,8 @@ namespace Garage_2_3_MG_JG_PES.Models
     {
         public int Id { get; set; }
 
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "Använd 3 -10 bokstäver")]
-        public string Type { get; set; }
+        [Display (Name = "Typ")]
+        public VehicleType VehicleType { get; set; }
 
         [Required]
         [RegularExpression(pattern:"^[A-Za-z]{3}[0-9]{3}", 
@@ -31,8 +32,8 @@ namespace Garage_2_3_MG_JG_PES.Models
         [Range(2,30, ErrorMessage = "Fordonet får inte ha färre hjul än två....")]
         public int NumberOfWheels { get; set; }
 
+       [ColumnAttribute( TypeName=  "datetime2")]
+        public DateTime? CheckIn { get; set; }
        
-        public DateTime CheckIn { get; set; }
-        public DateTime CheckOut { get; set; }
     }
 }

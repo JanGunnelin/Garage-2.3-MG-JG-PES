@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Garage_2_3_MG_JG_PES.DataAccessLayer;
 using Garage_2_3_MG_JG_PES.Models;
 
 namespace Garage_2_3_MG_JG_PES.Controllers
@@ -27,7 +28,7 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         }
 
         // GET: Vehicles/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -53,10 +54,12 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckIn([Bind(Include = "Id,Type,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn,CheckOut")] Vehicle vehicle)
+        public ActionResult CheckIn([Bind(Include = "Id,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn,CheckOut")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
+                
+                vehicle.CheckIn = DateTime.Now;
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
                 return RedirectToAction("Overview");
@@ -66,7 +69,7 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         }
 
         // GET: Vehicles/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -85,7 +88,7 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Type,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn,CheckOut")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "Id,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn,CheckOut")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +100,7 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         }
 
         // GET: Vehicles/Check-Out/5
-        public ActionResult CheckOut(string id)
+        public ActionResult CheckOut(int? id)
         {
             if (id == null)
             {
@@ -114,14 +117,18 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         // POST: Vehicles/Check-Out/5
         [HttpPost, ActionName("CheckOut")]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckOutConfirmed(string id)
+        public ActionResult CheckOutConfirmed(int? id)
         {
+            
             Vehicle vehicle = db.Vehicles.Find(id);
+           DateTime departure =  DateTime.Now;
+           DateTime arrival = (DateTime)vehicle.CheckIn;
+           TimeSpan parkeringstid = departure - arrival;
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
             return RedirectToAction("Overview");
         }
-
+            
         protected override void Dispose(bool disposing)
         {
             if (disposing)

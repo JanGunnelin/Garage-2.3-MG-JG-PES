@@ -171,8 +171,31 @@
     <Compile Include="Migrations\201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..Designer.cs">
       <DependentUpon>201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802140902142_Vehicletype.cs" />
+    <Compile Include="Migrations\201802140902142_Vehicletype.Designer.cs">
+      <DependentUpon>201802140902142_Vehicletype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802140913253_DeleteCheckOut.cs" />
+    <Compile Include="Migrations\201802140913253_DeleteCheckOut.Designer.cs">
+      <DependentUpon>201802140913253_DeleteCheckOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802141028131_time2.cs" />
+    <Compile Include="Migrations\201802141028131_time2.Designer.cs">
+      <DependentUpon>201802141028131_time2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802141035229_time2_sql.cs" />
+    <Compile Include="Migrations\201802141035229_time2_sql.Designer.cs">
+      <DependentUpon>201802141035229_time2_sql.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802141246251_CeckOut.cs" />
+    <Compile Include="Migrations\201802141246251_CeckOut.Designer.cs">
+      <DependentUpon>201802141246251_CeckOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802141250359_CeckOut1.cs" />
+    <Compile Include="Migrations\201802141250359_CeckOut1.Designer.cs">
+      <DependentUpon>201802141250359_CeckOut1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\RegisterContext.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VehicleType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -247,6 +270,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..resx">
       <DependentUpon>201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802140902142_Vehicletype.resx">
+      <DependentUpon>201802140902142_Vehicletype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802140913253_DeleteCheckOut.resx">
+      <DependentUpon>201802140913253_DeleteCheckOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802141028131_time2.resx">
+      <DependentUpon>201802141028131_time2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802141035229_time2_sql.resx">
+      <DependentUpon>201802141035229_time2_sql.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802141246251_CeckOut.resx">
+      <DependentUpon>201802141246251_CeckOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802141250359_CeckOut1.resx">
+      <DependentUpon>201802141250359_CeckOut1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
