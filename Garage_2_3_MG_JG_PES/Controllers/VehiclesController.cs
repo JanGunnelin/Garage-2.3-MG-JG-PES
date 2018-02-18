@@ -22,10 +22,51 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         }
 
         // GET: Vehicles
-        public ActionResult Overview()
+        public ActionResult Overview(string sortOrder, string searchString)
         {
-            return View(db.Vehicles.ToList());
+            ViewBag.VehicleTypeSortParm = String.IsNullOrEmpty(sortOrder) ? "vehicletype_desc" : "";
+            ViewBag.RegistrationNumberSortParm = sortOrder == "registrationnumber" ? "registrationnumber_desc" : "registrationnumber";
+            ViewBag.ColorSortParm = sortOrder == "color" ? "color_desc" : "color";
+            ViewBag.CheckInSortParm = sortOrder == "checkin" ? "checkin_desc" : "checkin";
+            var vehicles = from s in db.Vehicles select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "vehicletype_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.VehicleType);
+                    break;
+                case "registrationnumber":
+                    vehicles = vehicles.OrderBy(s => s.RegistrationNumber);
+                    break;
+                case "registrationnumber_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.RegistrationNumber);
+                    break;
+                case "color":
+                    vehicles = vehicles.OrderBy(s => s.Color);
+                    break;
+                case "color_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.Color);
+                    break;
+                case "checkin":
+                    vehicles = vehicles.OrderBy(s => s.CheckIn);
+                    break;
+                case "checkin_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.CheckIn);
+                    break;
+                default:
+                    vehicles = vehicles.OrderBy(s => s.VehicleType);
+                    break;
+            }
+            return View(vehicles.ToList());
         }
+
+        //public ActionResult Overview()
+        //{
+        //    return View(db.Vehicles.ToList());
+        //}
 
         // GET: Vehicles/Details/5
         public ActionResult Details(int? id)
@@ -45,10 +86,10 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         // GET: Vehicles/Check-In
         public ActionResult CheckIn()
         {
-            
+
             return View();
         }
-           
+
         // POST: Vehicles/Check-In
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -58,7 +99,7 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 vehicle.CheckIn = DateTime.Now;
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
@@ -94,7 +135,7 @@ namespace Garage_2_3_MG_JG_PES.Controllers
             {
                 db.Entry(vehicle).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Overview");
             }
             return View(vehicle);
         }
@@ -119,16 +160,16 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CheckOutConfirmed(int? id)
         {
-            
+
             Vehicle vehicle = db.Vehicles.Find(id);
-           DateTime departure =  DateTime.Now;
-           DateTime arrival = (DateTime)vehicle.CheckIn;
-           TimeSpan parkeringstid = departure - arrival;
+            //DateTime departure = DateTime.Now;
+            //DateTime arrival = (DateTime)vehicle.CheckIn;
+            //TimeSpan parkeringstid = departure - arrival;
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
             return RedirectToAction("Overview");
         }
-            
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -12,27 +12,30 @@ namespace Garage_2_3_MG_JG_PES.Models
     {
         public int Id { get; set; }
 
-        [Display (Name = "Typ")]
+        [Display (Name = "Type")]
         public VehicleType VehicleType { get; set; }
 
         [Required]
+        [Display(Name = "Registration Number")]
         [RegularExpression(pattern:"^[A-Za-z]{3}[0-9]{3}", 
-        ErrorMessage = " RegNr bör innehålla tre bokstäver samt tre siffror")]
+        ErrorMessage = "The registration number must start with 3 letters and end with 3 digits")]
         public string RegistrationNumber { get; set; }
 
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "Använd 3 -10 bokstäver")]
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "Please input 3-10 letters")]
         public string Color { get; set; }
 
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "Använd 3 -10 bokstäver")]
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "Please input 3-10 characters")]
         public string Brand { get; set; }
 
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "Använd 3 -10 bokstäver")]
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "Please input 3-10 characters")]
         public string Model { get; set; }
 
-        [Range(2,30, ErrorMessage = "Fordonet får inte ha färre hjul än två....")]
+        [Display(Name = "Number Of Wheels")]
+        [Range(2,30, ErrorMessage = "The vehicle must have at least two wheels")]
         public int NumberOfWheels { get; set; }
 
-       [ColumnAttribute( TypeName=  "datetime2")]
+        [Display(Name = "Check-In Time")]
+        [ColumnAttribute(TypeName =  "datetime2")]
         public DateTime? CheckIn { get; set; }
        
     }
