@@ -12,12 +12,19 @@ namespace Garage_2_3_MG_JG_PES.Models
     {
         public int Id { get; set; }
 
-        [Display (Name = "Type")]
-        public VehicleType VehicleType { get; set; }
+        [Display(Name = "Member-ID")]
+        public int MemberId { get; set; }
+
+        public virtual Member Member { get; set; }
+
+        [Display(Name = "Type")]
+        public int VehicleTypeID { get; set; }
+
+        public virtual VehicleType VehicleType { get; set; }
 
         [Required]
         [Display(Name = "Registration Number")]
-        [RegularExpression(pattern:"^[A-Za-z]{3}[0-9]{3}", 
+        [RegularExpression(pattern: "^[A-Za-z]{3}[0-9]{3}",
         ErrorMessage = "The registration number must start with 3 letters and end with 3 digits")]
         public string RegistrationNumber { get; set; }
 
@@ -31,12 +38,10 @@ namespace Garage_2_3_MG_JG_PES.Models
         public string Model { get; set; }
 
         [Display(Name = "Number Of Wheels")]
-        [Range(2,30, ErrorMessage = "The vehicle must have at least two wheels")]
+        [Range(2, 30, ErrorMessage = "The vehicle must have at least two wheels")]
         public int NumberOfWheels { get; set; }
 
         [Display(Name = "Check-In Time")]
-        [ColumnAttribute(TypeName =  "datetime2")]
         public DateTime? CheckIn { get; set; }
-       
     }
 }

@@ -149,55 +149,23 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ParkingsMeter.cs" />
-    <Compile Include="Controllers\VehiclesController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\VehiclesControllerOLD.cs" />
     <Compile Include="DataAccessLayer\RegisterContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802131547404_init.cs" />
-    <Compile Include="Migrations\201802131547404_init.Designer.cs">
-      <DependentUpon>201802131547404_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802131559421_Seed förslag nr 1.cs" />
-    <Compile Include="Migrations\201802131559421_Seed förslag nr 1.Designer.cs">
-      <DependentUpon>201802131559421_Seed förslag nr 1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802131602538_Sedd ändringar nr 2.cs" />
-    <Compile Include="Migrations\201802131602538_Sedd ändringar nr 2.Designer.cs">
-      <DependentUpon>201802131602538_Sedd ändringar nr 2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..cs" />
-    <Compile Include="Migrations\201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..Designer.cs">
-      <DependentUpon>201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802140902142_Vehicletype.cs" />
-    <Compile Include="Migrations\201802140902142_Vehicletype.Designer.cs">
-      <DependentUpon>201802140902142_Vehicletype.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802140913253_DeleteCheckOut.cs" />
-    <Compile Include="Migrations\201802140913253_DeleteCheckOut.Designer.cs">
-      <DependentUpon>201802140913253_DeleteCheckOut.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802141028131_time2.cs" />
-    <Compile Include="Migrations\201802141028131_time2.Designer.cs">
-      <DependentUpon>201802141028131_time2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802141035229_time2_sql.cs" />
-    <Compile Include="Migrations\201802141035229_time2_sql.Designer.cs">
-      <DependentUpon>201802141035229_time2_sql.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802141246251_CeckOut.cs" />
-    <Compile Include="Migrations\201802141246251_CeckOut.Designer.cs">
-      <DependentUpon>201802141246251_CeckOut.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802141250359_CeckOut1.cs" />
-    <Compile Include="Migrations\201802141250359_CeckOut1.Designer.cs">
-      <DependentUpon>201802141250359_CeckOut1.cs</DependentUpon>
+    <Compile Include="Migrations\201802191253306_init.cs" />
+    <Compile Include="Migrations\201802191253306_init.Designer.cs">
+      <DependentUpon>201802191253306_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Vehicle.cs" />
+    <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Models\VehicleType.cs" />
+    <Compile Include="Models\VehicleTypeOLD.cs" />
+    <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +209,18 @@
     <Content Include="Views\Vehicles\Edit.cshtml" />
     <Content Include="Views\Vehicles\Overview.cshtml" />
     <Content Include="Views\Vehicles\Index.cshtml" />
+    <Content Include="Views\VehicleTypes\Create.cshtml" />
+    <Content Include="Views\VehicleTypes\Delete.cshtml" />
+    <Content Include="Views\VehicleTypes\Details.cshtml" />
+    <Content Include="Views\VehicleTypes\Edit.cshtml" />
+    <Content Include="Views\VehicleTypes\Index.cshtml" />
+    <Content Include="Views\Vehicles\Create.cshtml" />
+    <Content Include="Views\Vehicles\Delete.cshtml" />
+    <Content Include="Views\Members\Create.cshtml" />
+    <Content Include="Views\Members\Delete.cshtml" />
+    <Content Include="Views\Members\Details.cshtml" />
+    <Content Include="Views\Members\Edit.cshtml" />
+    <Content Include="Views\Members\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -259,35 +239,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802131547404_init.resx">
-      <DependentUpon>201802131547404_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802131559421_Seed förslag nr 1.resx">
-      <DependentUpon>201802131559421_Seed förslag nr 1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802131602538_Sedd ändringar nr 2.resx">
-      <DependentUpon>201802131602538_Sedd ändringar nr 2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..resx">
-      <DependentUpon>201802131347593_Ändrade längden för strängländsminimum. Nu min=3 tecken..cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802140902142_Vehicletype.resx">
-      <DependentUpon>201802140902142_Vehicletype.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802140913253_DeleteCheckOut.resx">
-      <DependentUpon>201802140913253_DeleteCheckOut.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802141028131_time2.resx">
-      <DependentUpon>201802141028131_time2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802141035229_time2_sql.resx">
-      <DependentUpon>201802141035229_time2_sql.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802141246251_CeckOut.resx">
-      <DependentUpon>201802141246251_CeckOut.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802141250359_CeckOut1.resx">
-      <DependentUpon>201802141250359_CeckOut1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802191253306_init.resx">
+      <DependentUpon>201802191253306_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

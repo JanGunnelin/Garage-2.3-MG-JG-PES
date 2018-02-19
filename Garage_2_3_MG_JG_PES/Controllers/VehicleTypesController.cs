@@ -10,116 +10,107 @@ using Garage_2_3_MG_JG_PES.DataAccessLayer;
 
 namespace Garage_2_3_MG_JG_PES.Models
 {
-    public class VehiclesController : Controller
+    public class VehicleTypesController : Controller
     {
         private RegisterContext db = new RegisterContext();
 
-        // GET: Vehicles
+        // GET: VehicleTypes
         public ActionResult Index()
         {
-            var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
-            return View(vehicles.ToList());
+            return View(db.VehicleTypes.ToList());
         }
 
-        // GET: Vehicles/Details/5
+        // GET: VehicleTypes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
-            if (vehicle == null)
+            VehicleType vehicleType = db.VehicleTypes.Find(id);
+            if (vehicleType == null)
             {
                 return HttpNotFound();
             }
-            return View(vehicle);
+            return View(vehicleType);
         }
 
-        // GET: Vehicles/Create
+        // GET: VehicleTypes/Create
         public ActionResult Create()
         {
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "FirstName");
-            ViewBag.VehicleTypeID = new SelectList(db.VehicleTypes, "Id", "Type");
             return View();
         }
 
-        // POST: Vehicles/Create
+        // POST: VehicleTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,MemberId,VehicleTypeID,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "Id,Type")] VehicleType vehicleType)
         {
             if (ModelState.IsValid)
             {
-                db.Vehicles.Add(vehicle);
+                db.VehicleTypes.Add(vehicleType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "FirstName", vehicle.MemberId);
-            ViewBag.VehicleTypeID = new SelectList(db.VehicleTypes, "Id", "Type", vehicle.VehicleTypeID);
-            return View(vehicle);
+            return View(vehicleType);
         }
 
-        // GET: Vehicles/Edit/5
+        // GET: VehicleTypes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
-            if (vehicle == null)
+            VehicleType vehicleType = db.VehicleTypes.Find(id);
+            if (vehicleType == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "FirstName", vehicle.MemberId);
-            ViewBag.VehicleTypeID = new SelectList(db.VehicleTypes, "Id", "Type", vehicle.VehicleTypeID);
-            return View(vehicle);
+            return View(vehicleType);
         }
 
-        // POST: Vehicles/Edit/5
+        // POST: VehicleTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,MemberId,VehicleTypeID,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "Id,Type")] VehicleType vehicleType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vehicle).State = EntityState.Modified;
+                db.Entry(vehicleType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "FirstName", vehicle.MemberId);
-            ViewBag.VehicleTypeID = new SelectList(db.VehicleTypes, "Id", "Type", vehicle.VehicleTypeID);
-            return View(vehicle);
+            return View(vehicleType);
         }
 
-        // GET: Vehicles/Delete/5
+        // GET: VehicleTypes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
-            if (vehicle == null)
+            VehicleType vehicleType = db.VehicleTypes.Find(id);
+            if (vehicleType == null)
             {
                 return HttpNotFound();
             }
-            return View(vehicle);
+            return View(vehicleType);
         }
 
-        // POST: Vehicles/Delete/5
+        // POST: VehicleTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vehicle vehicle = db.Vehicles.Find(id);
-            db.Vehicles.Remove(vehicle);
+            VehicleType vehicleType = db.VehicleTypes.Find(id);
+            db.VehicleTypes.Remove(vehicleType);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

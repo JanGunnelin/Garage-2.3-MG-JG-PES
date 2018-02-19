@@ -14,6 +14,7 @@ namespace Garage_2_3_MG_JG_PES.DataAccessLayer
         {
         }
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<VehicleType> VehicleTypes { get; set; }
+        public DbSet<Member> Members { get; set; }
     }
-
 }
