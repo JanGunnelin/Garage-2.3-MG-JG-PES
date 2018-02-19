@@ -12,6 +12,7 @@ namespace Garage_2_3_MG_JG_PES.Models
         public string LastName { get; set; }
         public DateTime RegistrationDate { get; set; }
 
+       // public string FullName { get { return FirstName + " " + LastName; } }
         // Navigational property
         public virtual ICollection<Vehicle> Vehicles { get; set; }
     }

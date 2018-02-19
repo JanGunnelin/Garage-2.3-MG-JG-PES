@@ -150,7 +150,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\MembersController.cs" />
-    <Compile Include="Controllers\VehiclesControllerOLD.cs" />
+    <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="DataAccessLayer\RegisterContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -159,10 +159,14 @@
     <Compile Include="Migrations\201802191253306_init.Designer.cs">
       <DependentUpon>201802191253306_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802191451578_changevehiclemodel.cs" />
+    <Compile Include="Migrations\201802191451578_changevehiclemodel.Designer.cs">
+      <DependentUpon>201802191451578_changevehiclemodel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Vehicle.cs" />
-    <Compile Include="Controllers\VehiclesController.cs" />
+    <Compile Include="Controllers\Vehicles2Controller.cs" />
     <Compile Include="Models\VehicleType.cs" />
     <Compile Include="Models\VehicleTypeOLD.cs" />
     <Compile Include="Controllers\VehicleTypesController.cs" />
@@ -203,24 +207,25 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Vehicles\CheckIn.cshtml" />
-    <Content Include="Views\Vehicles\CheckOut.cshtml" />
-    <Content Include="Views\Vehicles\Details.cshtml" />
-    <Content Include="Views\Vehicles\Edit.cshtml" />
-    <Content Include="Views\Vehicles\Overview.cshtml" />
-    <Content Include="Views\Vehicles\Index.cshtml" />
+    <Content Include="Views\Vehicles2\CheckInOLD.cshtml" />
+    <Content Include="Views\Vehicles2\CheckOut.cshtml" />
+    <Content Include="Views\Vehicles2\Details.cshtml" />
+    <Content Include="Views\Vehicles2\Edit.cshtml" />
+    <Content Include="Views\Vehicles2\Overview.cshtml" />
+    <Content Include="Views\Vehicles2\IndexTEMP.cshtml" />
     <Content Include="Views\VehicleTypes\Create.cshtml" />
     <Content Include="Views\VehicleTypes\Delete.cshtml" />
     <Content Include="Views\VehicleTypes\Details.cshtml" />
     <Content Include="Views\VehicleTypes\Edit.cshtml" />
     <Content Include="Views\VehicleTypes\Index.cshtml" />
-    <Content Include="Views\Vehicles\Create.cshtml" />
-    <Content Include="Views\Vehicles\Delete.cshtml" />
+    <Content Include="Views\Vehicles2\CheckIn.cshtml" />
+    <Content Include="Views\Vehicles2\Delete.cshtml" />
     <Content Include="Views\Members\Create.cshtml" />
     <Content Include="Views\Members\Delete.cshtml" />
     <Content Include="Views\Members\Details.cshtml" />
     <Content Include="Views\Members\Edit.cshtml" />
     <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\Vehicles2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -241,6 +246,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802191253306_init.resx">
       <DependentUpon>201802191253306_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802191451578_changevehiclemodel.resx">
+      <DependentUpon>201802191451578_changevehiclemodel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

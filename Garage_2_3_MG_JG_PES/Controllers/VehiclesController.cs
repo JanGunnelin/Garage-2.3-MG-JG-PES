@@ -7,17 +7,59 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Garage_2_3_MG_JG_PES.DataAccessLayer;
+using Garage_2_3_MG_JG_PES.Models;
 
-namespace Garage_2_3_MG_JG_PES.Models
+namespace Garage_2_3_MG_JG_PES.Controllers
 {
     public class VehiclesController : Controller
     {
         private RegisterContext db = new RegisterContext();
 
-        // GET: Vehicles
+        // GET: Home
         public ActionResult Index()
         {
-            var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+            return View();
+        }
+
+        // GET: Vehicles
+        public ActionResult Overview(string sortOrder, string searchString)
+        {
+            ViewBag.VehicleTypeSortParm = String.IsNullOrEmpty(sortOrder) ? "vehicletype_desc" : "";
+            ViewBag.RegistrationNumberSortParm = sortOrder == "registrationnumber" ? "registrationnumber_desc" : "registrationnumber";
+            ViewBag.ColorSortParm = sortOrder == "color" ? "color_desc" : "color";
+            ViewBag.CheckInSortParm = sortOrder == "checkin" ? "checkin_desc" : "checkin";
+            var vehicles = from s in db.Vehicles select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "vehicletype_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.VehicleType);
+                    break;
+                case "registrationnumber":
+                    vehicles = vehicles.OrderBy(s => s.RegistrationNumber);
+                    break;
+                case "registrationnumber_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.RegistrationNumber);
+                    break;
+                case "color":
+                    vehicles = vehicles.OrderBy(s => s.Color);
+                    break;
+                case "color_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.Color);
+                    break;
+                case "checkin":
+                    vehicles = vehicles.OrderBy(s => s.CheckIn);
+                    break;
+                case "checkin_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.CheckIn);
+                    break;
+                default:
+                    vehicles = vehicles.OrderBy(s => s.VehicleType);
+                    break;
+            }
             return View(vehicles.ToList());
         }
 
@@ -36,30 +78,28 @@ namespace Garage_2_3_MG_JG_PES.Models
             return View(vehicle);
         }
 
-        // GET: Vehicles/Create
-        public ActionResult Create()
+        // GET: Vehicles/Check-In
+        public ActionResult CheckIn()
         {
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "FirstName");
-            ViewBag.VehicleTypeID = new SelectList(db.VehicleTypes, "Id", "Type");
             return View();
         }
 
-        // POST: Vehicles/Create
+        // POST: Vehicles/Check-In
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,MemberId,VehicleTypeID,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn")] Vehicle vehicle)
+        public ActionResult CheckIn([Bind(Include = "Id,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn,CheckOut")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
+
+                vehicle.CheckIn = DateTime.Now;
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Overview");
             }
 
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "FirstName", vehicle.MemberId);
-            ViewBag.VehicleTypeID = new SelectList(db.VehicleTypes, "Id", "Type", vehicle.VehicleTypeID);
             return View(vehicle);
         }
 
@@ -75,8 +115,6 @@ namespace Garage_2_3_MG_JG_PES.Models
             {
                 return HttpNotFound();
             }
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "FirstName", vehicle.MemberId);
-            ViewBag.VehicleTypeID = new SelectList(db.VehicleTypes, "Id", "Type", vehicle.VehicleTypeID);
             return View(vehicle);
         }
 
@@ -85,21 +123,19 @@ namespace Garage_2_3_MG_JG_PES.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,MemberId,VehicleTypeID,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "Id,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn,CheckOut")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(vehicle).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Overview");
             }
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "FirstName", vehicle.MemberId);
-            ViewBag.VehicleTypeID = new SelectList(db.VehicleTypes, "Id", "Type", vehicle.VehicleTypeID);
             return View(vehicle);
         }
 
-        // GET: Vehicles/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Vehicles/Check-Out/5
+        public ActionResult CheckOut(int? id)
         {
             if (id == null)
             {
@@ -113,15 +149,19 @@ namespace Garage_2_3_MG_JG_PES.Models
             return View(vehicle);
         }
 
-        // POST: Vehicles/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Vehicles/Check-Out/5
+        [HttpPost, ActionName("CheckOut")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult CheckOutConfirmed(int? id)
         {
+
             Vehicle vehicle = db.Vehicles.Find(id);
+            //DateTime departure = DateTime.Now;
+            //DateTime arrival = (DateTime)vehicle.CheckIn;
+            //TimeSpan parkeringstid = departure - arrival;
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Overview");
         }
 
         protected override void Dispose(bool disposing)

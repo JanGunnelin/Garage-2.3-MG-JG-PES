@@ -7,11 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Garage_2_3_MG_JG_PES.DataAccessLayer;
-using Garage_2_3_MG_JG_PES.Models;
 
-namespace Garage_2_3_MG_JG_PES.Controllers
+namespace Garage_2_3_MG_JG_PES.Models
 {
-    public class VehiclesControllerOLD : Controller
+    public class Vehicles2Controller : Controller
     {
         private RegisterContext db = new RegisterContext();
 
@@ -24,49 +23,44 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         // GET: Vehicles
         public ActionResult Overview(string sortOrder, string searchString)
         {
-            ViewBag.VehicleTypeSortParm = String.IsNullOrEmpty(sortOrder) ? "vehicletype_desc" : "";
-            ViewBag.RegistrationNumberSortParm = sortOrder == "registrationnumber" ? "registrationnumber_desc" : "registrationnumber";
-            ViewBag.ColorSortParm = sortOrder == "color" ? "color_desc" : "color";
-            ViewBag.CheckInSortParm = sortOrder == "checkin" ? "checkin_desc" : "checkin";
+            //ViewBag.VehicleTypeSortParm = String.IsNullOrEmpty(sortOrder) ? "vehicletype_desc" : "";
+            //ViewBag.RegistrationNumberSortParm = sortOrder == "registrationnumber" ? "registrationnumber_desc" : "registrationnumber";
+            //ViewBag.ColorSortParm = sortOrder == "color" ? "color_desc" : "color";
+            //ViewBag.CheckInSortParm = sortOrder == "checkin" ? "checkin_desc" : "checkin";
             var vehicles = from s in db.Vehicles select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString.ToUpper()));
-            }
-            switch (sortOrder)
-            {
-                case "vehicletype_desc":
-                    vehicles = vehicles.OrderByDescending(s => s.VehicleType);
-                    break;
-                case "registrationnumber":
-                    vehicles = vehicles.OrderBy(s => s.RegistrationNumber);
-                    break;
-                case "registrationnumber_desc":
-                    vehicles = vehicles.OrderByDescending(s => s.RegistrationNumber);
-                    break;
-                case "color":
-                    vehicles = vehicles.OrderBy(s => s.Color);
-                    break;
-                case "color_desc":
-                    vehicles = vehicles.OrderByDescending(s => s.Color);
-                    break;
-                case "checkin":
-                    vehicles = vehicles.OrderBy(s => s.CheckIn);
-                    break;
-                case "checkin_desc":
-                    vehicles = vehicles.OrderByDescending(s => s.CheckIn);
-                    break;
-                default:
-                    vehicles = vehicles.OrderBy(s => s.VehicleType);
-                    break;
-            }
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString.ToUpper()));
+            //}
+            //switch (sortOrder)
+            //{
+            //    case "vehicletype_desc":
+            //        vehicles = vehicles.OrderByDescending(s => s.VehicleType);
+            //        break;
+            //    case "registrationnumber":
+            //        vehicles = vehicles.OrderBy(s => s.RegistrationNumber);
+            //        break;
+            //    case "registrationnumber_desc":
+            //        vehicles = vehicles.OrderByDescending(s => s.RegistrationNumber);
+            //        break;
+            //    case "color":
+            //        vehicles = vehicles.OrderBy(s => s.Color);
+            //        break;
+            //    case "color_desc":
+            //        vehicles = vehicles.OrderByDescending(s => s.Color);
+            //        break;
+            //    case "checkin":
+            //        vehicles = vehicles.OrderBy(s => s.CheckIn);
+            //        break;
+            //    case "checkin_desc":
+            //        vehicles = vehicles.OrderByDescending(s => s.CheckIn);
+            //        break;
+            //    default:
+            //        vehicles = vehicles.OrderBy(s => s.VehicleType);
+            //        break;
+            //}
             return View(vehicles.ToList());
         }
-
-        //public ActionResult Overview()
-        //{
-        //    return View(db.Vehicles.ToList());
-        //}
 
         // GET: Vehicles/Details/5
         public ActionResult Details(int? id)
@@ -95,7 +89,7 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckIn([Bind(Include = "Id,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn,CheckOut")] Vehicle vehicle)
+        public ActionResult CheckIn([Bind(Include = "Id,MemberId,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -129,7 +123,7 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn,CheckOut")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "Id,MemberId,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
