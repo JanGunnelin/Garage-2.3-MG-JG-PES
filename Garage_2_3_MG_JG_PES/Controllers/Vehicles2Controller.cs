@@ -117,6 +117,8 @@ namespace Garage_2_3_MG_JG_PES.Models
             {
                 return HttpNotFound();
             }
+            ViewBag.MemberId = new SelectList(db.Members, "Id", "FirstName");
+            ViewBag.VehicleTypeID = new SelectList(db.VehicleTypes, "Id", "Type");
             return View(vehicle);
         }
 
