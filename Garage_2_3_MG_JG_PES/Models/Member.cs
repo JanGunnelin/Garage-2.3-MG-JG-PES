@@ -19,7 +19,7 @@ namespace Garage_2_3_MG_JG_PES.Models
         [Display(Name = "Registration Date")]
         public DateTime RegistrationDate { get; set; }
 
-       // public string FullName { get { return FirstName + " " + LastName; } }
+        public string FullName { get { return FirstName + " " + LastName; } }
         // Navigational property
         public virtual ICollection<Vehicle> Vehicles { get; set; }
     }

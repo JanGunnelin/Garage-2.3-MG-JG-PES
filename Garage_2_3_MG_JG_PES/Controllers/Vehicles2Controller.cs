@@ -241,11 +241,7 @@ namespace Garage_2_3_MG_JG_PES.Models
         [ValidateAntiForgeryToken]
         public ActionResult CheckOutConfirmed(int? id)
         {
-
             Vehicle vehicle = db.Vehicles.Find(id);
-            //DateTime departure = DateTime.Now;
-            //DateTime arrival = (DateTime)vehicle.CheckIn;
-            //TimeSpan parkeringstid = departure - arrival;
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
             return RedirectToAction("Overview");

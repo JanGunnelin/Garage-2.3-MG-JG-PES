@@ -4,7 +4,7 @@
     ViewBag.Title = "DetailedOverview";
 }
 
-<h2>Detailed Overview</h2>
+<h2>Detailed Vehicles Overview</h2>
 
 <p>
     @Html.ActionLink("Check-In Vehicle", "CheckIn")
@@ -57,7 +57,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Member.LastName)
+                @Html.DisplayFor(modelItem => item.Member.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VehicleType.Type)
