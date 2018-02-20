@@ -23,43 +23,43 @@ namespace Garage_2_3_MG_JG_PES.Models
         // GET: Vehicles
         public ActionResult Overview(string sortOrder, string searchString)
         {
-            //ViewBag.VehicleTypeSortParm = String.IsNullOrEmpty(sortOrder) ? "vehicletype_desc" : "";
-            //ViewBag.RegistrationNumberSortParm = sortOrder == "registrationnumber" ? "registrationnumber_desc" : "registrationnumber";
-            //ViewBag.ColorSortParm = sortOrder == "color" ? "color_desc" : "color";
-            //ViewBag.CheckInSortParm = sortOrder == "checkin" ? "checkin_desc" : "checkin";
-            //var vehicles = from s in db.Vehicles select s;
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString.ToUpper()));
-            //}
-            //switch (sortOrder)
-            //{
-            //    case "vehicletype_desc":
-            //        vehicles = vehicles.OrderByDescending(s => s.VehicleType);
-            //        break;
-            //    case "registrationnumber":
-            //        vehicles = vehicles.OrderBy(s => s.RegistrationNumber);
-            //        break;
-            //    case "registrationnumber_desc":
-            //        vehicles = vehicles.OrderByDescending(s => s.RegistrationNumber);
-            //        break;
-            //    case "color":
-            //        vehicles = vehicles.OrderBy(s => s.Color);
-            //        break;
-            //    case "color_desc":
-            //        vehicles = vehicles.OrderByDescending(s => s.Color);
-            //        break;
-            //    case "checkin":
-            //        vehicles = vehicles.OrderBy(s => s.CheckIn);
-            //        break;
-            //    case "checkin_desc":
-            //        vehicles = vehicles.OrderByDescending(s => s.CheckIn);
-            //        break;
-            //    default:
-            //        vehicles = vehicles.OrderBy(s => s.VehicleType);
-            //        break;
-            //}
-            var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+            ViewBag.VehicleTypeSortParm = String.IsNullOrEmpty(sortOrder) ? "vehicletype_desc" : "";
+            ViewBag.RegistrationNumberSortParm = sortOrder == "registrationnumber" ? "registrationnumber_desc" : "registrationnumber";
+            ViewBag.ColorSortParm = sortOrder == "color" ? "color_desc" : "color";
+            ViewBag.CheckInSortParm = sortOrder == "checkin" ? "checkin_desc" : "checkin";
+            var vehicles = from s in db.Vehicles select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "vehicletype_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.VehicleType.Type);
+                    break;
+                case "registrationnumber":
+                    vehicles = vehicles.OrderBy(s => s.RegistrationNumber);
+                    break;
+                case "registrationnumber_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.RegistrationNumber);
+                    break;
+                case "color":
+                    vehicles = vehicles.OrderBy(s => s.Color);
+                    break;
+                case "color_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.Color);
+                    break;
+                case "checkin":
+                    vehicles = vehicles.OrderBy(s => s.CheckIn);
+                    break;
+                case "checkin_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.CheckIn);
+                    break;
+                default:
+                    vehicles = vehicles.OrderBy(s => s.VehicleType.Type);
+                    break;
+            }
+            //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
             return View(vehicles.ToList());
         }
 
