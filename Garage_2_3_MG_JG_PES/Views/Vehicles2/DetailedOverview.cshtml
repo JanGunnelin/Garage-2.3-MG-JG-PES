@@ -6,6 +6,23 @@
 
 <h2>Detailed Overview</h2>
 
+<p>
+    @Html.ActionLink("Check-In Vehicle", "CheckIn")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Registration Number: @Html.TextBox("SearchString1")
+    </p>
+    <p>
+        Find by Vehicle Type: @Html.TextBox("SearchString2")
+    </p>
+    <p>
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
 
     <tr>
@@ -35,7 +52,6 @@
         </th>
         <th></th>
     </tr>
-
 
     @foreach (var item in Model)
     {

@@ -80,7 +80,9 @@ namespace Garage_2_3_MG_JG_PES.Models
             ViewBag.ModelSortParm = sortOrder == "model" ? "model_desc" : "model";
             ViewBag.NumberOfWheelsSortParm = sortOrder == "numberofwheels" ? "numberofwheels_desc" : "numberofwheels";
             ViewBag.CheckInSortParm = sortOrder == "checkin" ? "checkin_desc" : "checkin";
+
             var vehicles = from s in db.Vehicles select s;
+
             if (!String.IsNullOrEmpty(searchString1))
             {
                 vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString1.ToUpper()));
@@ -141,7 +143,6 @@ namespace Garage_2_3_MG_JG_PES.Models
                     vehicles = vehicles.OrderBy(s => s.Member.LastName);
                     break;
             }
-            //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
             return View(vehicles.ToList());
         }
 
