@@ -230,6 +230,7 @@
     <Content Include="Views\Members\Edit.cshtml" />
     <Content Include="Views\Members\Index.cshtml" />
     <Content Include="Views\Vehicles2\Index.cshtml" />
+    <Content Include="Views\Vehicles2\DetailedOverview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -21,19 +21,83 @@ namespace Garage_2_3_MG_JG_PES.Models
         }
 
         // GET: Vehicles
-        public ActionResult Overview(string sortOrder, string searchString)
+        public ActionResult Overview(string sortOrder, string searchString1, string searchString2, string clear)
         {
-            ViewBag.VehicleTypeSortParm = String.IsNullOrEmpty(sortOrder) ? "vehicletype_desc" : "";
+            ViewBag.OwnerSortParm = String.IsNullOrEmpty(sortOrder) ? "owner_desc" : "";
+            ViewBag.VehicleTypeSortParm = sortOrder == "vehicletype" ? "vehicletype_desc" : "vehicletype";
             ViewBag.RegistrationNumberSortParm = sortOrder == "registrationnumber" ? "registrationnumber_desc" : "registrationnumber";
-            ViewBag.ColorSortParm = sortOrder == "color" ? "color_desc" : "color";
             ViewBag.CheckInSortParm = sortOrder == "checkin" ? "checkin_desc" : "checkin";
+
             var vehicles = from s in db.Vehicles select s;
-            if (!String.IsNullOrEmpty(searchString))
+
+            if (!String.IsNullOrEmpty(searchString1))
             {
-                vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString.ToUpper()));
+                vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString1.ToUpper()));
             }
+            if (!String.IsNullOrEmpty(searchString2))
+            {
+                vehicles = vehicles.Where(s => s.VehicleType.Type.ToUpper().Contains(searchString2.ToUpper()));
+            }
+
             switch (sortOrder)
             {
+                case "owner_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.Member.LastName);
+                    break;
+                case "vehicletype":
+                    vehicles = vehicles.OrderBy(s => s.VehicleType.Type);
+                    break;
+                case "vehicletype_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.VehicleType.Type);
+                    break;
+                case "registrationnumber":
+                    vehicles = vehicles.OrderBy(s => s.RegistrationNumber);
+                    break;
+                case "registrationnumber_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.RegistrationNumber);
+                    break;
+                case "checkin":
+                    vehicles = vehicles.OrderBy(s => s.CheckIn);
+                    break;
+                case "checkin_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.CheckIn);
+                    break;
+                default:
+                    vehicles = vehicles.OrderBy(s => s.Member.LastName);
+                    break;
+            }
+            return View(vehicles.ToList());
+        }
+
+        // GET: Vehicles
+        public ActionResult DetailedOverview(string sortOrder, string searchString1, string searchString2, string clear)
+        {
+            ViewBag.OwnerSortParm = String.IsNullOrEmpty(sortOrder) ? "owner_desc" : "";
+            ViewBag.VehicleTypeSortParm = sortOrder == "vehicletype" ? "vehicletype_desc" : "vehicletype";
+            ViewBag.RegistrationNumberSortParm = sortOrder == "registrationnumber" ? "registrationnumber_desc" : "registrationnumber";
+            ViewBag.ColorSortParm = sortOrder == "color" ? "color_desc" : "color";
+            ViewBag.BrandSortParm = sortOrder == "brand" ? "brand_desc" : "brand";
+            ViewBag.ModelSortParm = sortOrder == "model" ? "model_desc" : "model";
+            ViewBag.NumberOfWheelsSortParm = sortOrder == "numberofwheels" ? "numberofwheels_desc" : "numberofwheels";
+            ViewBag.CheckInSortParm = sortOrder == "checkin" ? "checkin_desc" : "checkin";
+            var vehicles = from s in db.Vehicles select s;
+            if (!String.IsNullOrEmpty(searchString1))
+            {
+                vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString1.ToUpper()));
+            }
+            if (!String.IsNullOrEmpty(searchString2))
+            {
+                vehicles = vehicles.Where(s => s.VehicleType.Type.ToUpper().Contains(searchString2.ToUpper()));
+            }
+
+            switch (sortOrder)
+            {
+                case "owner_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.Member.LastName);
+                    break;
+                case "vehicletype":
+                    vehicles = vehicles.OrderBy(s => s.VehicleType.Type);
+                    break;
                 case "vehicletype_desc":
                     vehicles = vehicles.OrderByDescending(s => s.VehicleType.Type);
                     break;
@@ -49,6 +113,24 @@ namespace Garage_2_3_MG_JG_PES.Models
                 case "color_desc":
                     vehicles = vehicles.OrderByDescending(s => s.Color);
                     break;
+                case "brand":
+                    vehicles = vehicles.OrderBy(s => s.Brand);
+                    break;
+                case "brand_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.Brand);
+                    break;
+                case "model":
+                    vehicles = vehicles.OrderBy(s => s.Model);
+                    break;
+                case "model_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.Model);
+                    break;
+                case "numberofwheels":
+                    vehicles = vehicles.OrderBy(s => s.NumberOfWheels);
+                    break;
+                case "numberofwheels_desc":
+                    vehicles = vehicles.OrderByDescending(s => s.NumberOfWheels);
+                    break;
                 case "checkin":
                     vehicles = vehicles.OrderBy(s => s.CheckIn);
                     break;
@@ -56,7 +138,7 @@ namespace Garage_2_3_MG_JG_PES.Models
                     vehicles = vehicles.OrderByDescending(s => s.CheckIn);
                     break;
                 default:
-                    vehicles = vehicles.OrderBy(s => s.VehicleType.Type);
+                    vehicles = vehicles.OrderBy(s => s.Member.LastName);
                     break;
             }
             //var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
