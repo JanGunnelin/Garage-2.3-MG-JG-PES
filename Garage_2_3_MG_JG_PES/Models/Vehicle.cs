@@ -12,13 +12,13 @@ namespace Garage_2_3_MG_JG_PES.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Member-ID")]
+        [Display(Name = "Member-Id")]
         public int MemberId { get; set; }
 
         public virtual Member Member { get; set; }
 
         [Display(Name = "Type")]
-        public int VehicleTypeID { get; set; }
+        public int VehicleTypeId { get; set; }
 
         public virtual VehicleType VehicleType { get; set; }
 

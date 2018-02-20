@@ -27,7 +27,7 @@ namespace Garage_2_3_MG_JG_PES.Models
             //ViewBag.RegistrationNumberSortParm = sortOrder == "registrationnumber" ? "registrationnumber_desc" : "registrationnumber";
             //ViewBag.ColorSortParm = sortOrder == "color" ? "color_desc" : "color";
             //ViewBag.CheckInSortParm = sortOrder == "checkin" ? "checkin_desc" : "checkin";
-            var vehicles = from s in db.Vehicles select s;
+            //var vehicles = from s in db.Vehicles select s;
             //if (!String.IsNullOrEmpty(searchString))
             //{
             //    vehicles = vehicles.Where(s => s.RegistrationNumber.ToUpper().Contains(searchString.ToUpper()));
@@ -59,6 +59,7 @@ namespace Garage_2_3_MG_JG_PES.Models
             //        vehicles = vehicles.OrderBy(s => s.VehicleType);
             //        break;
             //}
+            var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
             return View(vehicles.ToList());
         }
 
@@ -90,7 +91,7 @@ namespace Garage_2_3_MG_JG_PES.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckIn([Bind(Include = "Id,MemberId,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn")] Vehicle vehicle)
+        public ActionResult CheckIn([Bind(Include = "Id,MemberId,VehicleTypeId,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -124,7 +125,7 @@ namespace Garage_2_3_MG_JG_PES.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,MemberId,VehicleType,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "Id,MemberId,VehicleTypeId,RegistrationNumber,Color,Brand,Model,NumberOfWheels,CheckIn")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {

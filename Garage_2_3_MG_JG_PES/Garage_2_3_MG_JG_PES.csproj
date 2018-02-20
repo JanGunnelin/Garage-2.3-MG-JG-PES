@@ -163,6 +163,10 @@
     <Compile Include="Migrations\201802191451578_changevehiclemodel.Designer.cs">
       <DependentUpon>201802191451578_changevehiclemodel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802200849099_Id-fix.cs" />
+    <Compile Include="Migrations\201802200849099_Id-fix.Designer.cs">
+      <DependentUpon>201802200849099_Id-fix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -249,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802191451578_changevehiclemodel.resx">
       <DependentUpon>201802191451578_changevehiclemodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802200849099_Id-fix.resx">
+      <DependentUpon>201802200849099_Id-fix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
