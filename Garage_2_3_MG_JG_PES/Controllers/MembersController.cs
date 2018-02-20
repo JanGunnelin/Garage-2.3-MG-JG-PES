@@ -51,6 +51,7 @@ namespace Garage_2_3_MG_JG_PES.Controllers
         {
             if (ModelState.IsValid)
             {
+                member.RegistrationDate = DateTime.Now;
                 db.Members.Add(member);
                 db.SaveChanges();
                 return RedirectToAction("Index");
